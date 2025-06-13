@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phone Book</title>
+  <link rel="stylesheet" href="main.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Phone Book</h1>
+  </header>
+
+  <main class="main-container">
+    <div class="controls-bar">
+      <div class="left-controls">
+        <div class="contact-counter">Contacts: 0</div>
+        <input type="text" id="searchInput" placeholder="Search..." />
+      </div>
+      <div class="right-controls">
+        <button id="addContactBtn">
+          <i class="fas fa-user-plus"></i> Add Contact
+        </button>
+        <button id="deleteAllBtn">
+          <i class="fas fa-trash"></i> Delete All
+        </button>
+        <button id="showFavoritesBtn">
+          <i class="fas fa-star"></i> Show Favorites
+        </button>
+      </div>
+    </div>
+
+    <div id="contactsContainer" class="contacts-box">
+      <!-- אנשי קשר יופיעו כאן -->
+    </div>
+
+    <div id="emptyMessage" class="empty-message hidden">Empty List</div> <!-- 🔧 הודעה אם אין תוצאות -->
+  </main>
+
+  <div id="popupOverlay" class="popup-overlay hidden">
+    <div class="popup">
+      <h2>Add New Contact</h2>
+      <form id="addContactForm">
+        <label>Name* <input type="text" id="nameInput" required /></label>
+        <label>Phone* <input type="text" id="phoneInput" required /></label>
+        <label>Age <input type="number" id="ageInput" /></label>
+        <label>Image URL <input type="text" id="imgInput" /></label>
+        <div class="popup-actions">
+          <button type="submit">Save</button>
+          <button type="button" id="closePopupBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="detailPopup" class="popup-overlay hidden">
+    <div class="popup">
+      <h2>Contact Details</h2>
+      <img id="popupImg" src="" alt="Contact Image" />
+      <strong>Name:</strong> <span id="popupName"></span><br />
+      <strong>Phone:</strong> <span id="popupPhone"></span><br />
+      <strong>Age:</strong> <span id="popupAge"></span><br />
+      <p class="detail-note">Thanks for using Liron's &amp; Alexander's Website</p>
+      <div class="popup-actions">
+        <button type="button" id="closeDetailBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    &copy; 2025 Liron Heker and Alexander Dovbush
+  </footer>
+
+  <script src="js.js"></script>
+</body>
+</html>
