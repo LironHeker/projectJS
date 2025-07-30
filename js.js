@@ -67,3 +67,70 @@ function renderContacts(searchTerm = '') {
 }
 
 renderContacts(); // קריאה ראשונית לפונקציה שמציגה את כל אנשי הקשר ברגע טעינת הדף
+
+// add contact button
+const addForm = document.getElementById('addContactForm');
+const popupOverlay = document.getElementById('popupOverlay');
+const closeBtn = document.getElementById('closePopupBtn');
+const addBtn = document.getElementById('addContactBtn');
+const phoneInput = document.getElementById('phoneInput');
+
+// כפתור לפתיחת add contacts
+addBtn.addEventListener('click', () => {
+  popupOverlay.classList.remove('hidden');
+});
+
+// כפתור לסגירת add contacts
+closeBtn.addEventListener('click', () => {
+  popupOverlay.classList.add('hidden');
+  addForm.reset(); // איפוס שדות
+  editIndex = null; // ביטול מצב עריכה
+});
+
+// שליחת הטופס
+addForm.addEventListener('submit', function (e) {
+  e.preventDefault(); // מניעת שליחה רגילה של הטופס
+
+  const name = document.getElementById('nameInput').value.trim(); // שם
+  let phone = phoneInput.value.replace(/\D/g, '').slice(0, 10); // טלפון ללא תווים לא מספריים
+  const age = document.getElementById('ageInput').value.trim(); // גיל
+  const imgUrl = document.getElementById('imgInput').value.trim() || 'images/default.jpg'; // כתובת תמונה
+
+  // בדיקת שם
+  if (!/^[A-Za-z֐-׿\s]+$/.test(name)) {
+    alert('Name must contain only Hebrew or English letters.');
+    return;
+  }
+
+  // בדיקת מספר טלפון
+  if (!/^\d{10}$/.test(phone)) {
+    alert('Phone number must contain exactly 10 digits.');
+    return;
+  }
+
+  const formattedPhone = `${phone.slice(0, 3)}-${phone.slice(3)}`; // פורמט מספר טלפון
+
+  // בדיקה האם המספר כבר קיים
+  const isDuplicate = contacts.some((contact, idx) =>
+    contact.phone === formattedPhone && idx !== editIndex
+  );
+
+  if (isDuplicate) {
+    alert("This phone number already exists in the system.");
+    return;
+  }
+
+  // אופרטור אשר משנה את התוכן של איש קשר כאשר שונה מ null / else יוצר איש קשר חדש
+  if (editIndex !== null) {
+    contacts[editIndex] = { ...contacts[editIndex], name, phone: formattedPhone, age, imgUrl };
+    editIndex = null;
+  } else {
+    const newContact = { name, phone: formattedPhone, age, imgUrl, isFavorite: false };
+    contacts.push(newContact);
+  }
+
+  renderContacts(searchInput.value.trim().toLowerCase()); // רענון תצוגה
+  popupOverlay.classList.add('hidden');
+  addForm.reset(); // איפוס הטופס
+});
+
