@@ -134,3 +134,62 @@ addForm.addEventListener('submit', function (e) {
   addForm.reset(); // איפוס הטופס
 });
 
+// details popup
+const detailPopup = document.getElementById('detailPopup');
+const popupName = document.getElementById('popupName');
+const popupPhone = document.getElementById('popupPhone');
+const popupAge = document.getElementById('popupAge');
+const popupImg = document.getElementById('popupImg');
+const closeDetailBtn = document.getElementById('closeDetailBtn');
+
+// כאשר נלחץ על אחד מהכפתורים האלה הפונקציה תפעל ותעשה את הפעולה של כל כפתור
+contactsContainer.addEventListener('click', (e) => {
+  const favBtn = e.target.closest('.fav-btn');
+  const deleteBtn = e.target.closest('.delete-btn');
+  const detailBtn = e.target.closest('.detail-btn');
+  const editBtn = e.target.closest('.fa-pen');
+
+  // כוכב - סימון מועדף
+  if (favBtn) {
+    const index = favBtn.dataset.index;
+    contacts[index].isFavorite = !contacts[index].isFavorite;
+    renderContacts(searchInput.value.trim().toLowerCase());
+  }
+
+  // מחיקת איש קשר
+  if (deleteBtn) {
+    const index = deleteBtn.dataset.index;
+    if (confirm("Are you sure you want to delete this contact?")) {
+      contacts.splice(index, 1);
+      renderContacts(searchInput.value.trim().toLowerCase());
+    }
+  }
+
+  // פרטי איש קשר
+  if (detailBtn) {
+    const index = detailBtn.dataset.index;
+    const contact = contacts[index];
+    popupName.textContent = contact.name;
+    popupPhone.textContent = contact.phone;
+    popupAge.textContent = contact.age;
+    popupImg.src = contact.imgUrl;
+    detailPopup.classList.remove('hidden');
+  }
+
+  // עריכה
+  if (editBtn) {
+    const index = editBtn.closest('button').dataset.index;
+    const contact = contacts[index];
+    document.getElementById('nameInput').value = contact.name;
+    phoneInput.value = contact.phone;
+    document.getElementById('ageInput').value = contact.age;
+    document.getElementById('imgInput').value = contact.imgUrl;
+    editIndex = Number(index);
+    popupOverlay.classList.remove('hidden');
+  }
+});
+
+// סגירת חלון details
+closeDetailBtn.addEventListener('click', () => {
+  detailPopup.classList.add('hidden');
+});
