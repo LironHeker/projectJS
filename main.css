@@ -9,6 +9,56 @@ html, body {
   background-color: whitesmoke;
 }
 
+/* מצב לילה */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+body.dark-mode .main-container {
+  background-color: #2a2a2a;
+  box-shadow: 0 0 10px #555;
+}
+
+body.dark-mode .contact-card {
+  background-color: #333;
+  border-color: #555;
+}
+
+body.dark-mode .popup,
+body.dark-mode #detailPopup .popup {
+  background-color: #2b2b2b;
+  color: white;
+}
+
+body.dark-mode input,
+body.dark-mode .popup-actions button,
+body.dark-mode .right-controls button {
+  background-color: #444;
+  color: white;
+  border: 1px solid #777;
+}
+
+/* אפקט hover דרך JS */
+.contact-card.hovered {
+  background-color: #f0f0f0;
+}
+
+body.dark-mode .contact-card.hovered {
+  background-color: #444;
+}
+
+/* כפתור מצב לילה */
+#toggleDarkMode {
+  background-color: black;
+  color: white;
+  border: 1px solid gray;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
 /* כותרת הדף */
 .site-header {
   background: linear-gradient(to right, rgb(69, 69, 213), black);
@@ -183,7 +233,7 @@ html, body {
   color: black;
 }
 
-/* 🔧 עיצוב ייחודי לכפתור עריכה */
+/* עיצוב ייחודי לכפתור עריכה */
 .contact-actions .edit-btn i {
   color: #007acc;
 }
@@ -236,7 +286,7 @@ html, body {
   background-color: #555;
 }
 
-/* 🔧 הודעת רשימה ריקה */
+/* הודעת רשימה ריקה */
 .empty-message {
   text-align: center;
   font-size: 1.5rem;
@@ -256,7 +306,6 @@ html, body {
   color: rgb(172, 172, 172);
   margin-top: auto;
 }
-
 
 /* ===================== Responsive ===================== */
 
@@ -367,18 +416,16 @@ html, body {
   }
 }
 
-
 /* Mobile Phones */
 @media (max-width: 480px) {
-  
   .main-container {
-  width: 100%;
-  max-width: none;
-  padding: 1rem 0.5rem;
-  margin: 0;
-  border-radius: 0;
-  box-shadow: none;
-}
+    width: 100%;
+    max-width: none;
+    padding: 1rem 0.5rem;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
 
   .site-header h1 {
     font-size: 1.4rem;
@@ -390,7 +437,6 @@ html, body {
     gap: 1rem;
   }
 
-  /* 🔍 Search input */
   .left-controls {
     width: 100%;
     display: flex;
@@ -406,7 +452,6 @@ html, body {
     text-align: center;
   }
 
-  /* 🎯 Buttons centered with spacing */
   .right-controls {
     width: 100%;
     display: flex;
@@ -442,7 +487,6 @@ html, body {
     gap: 0.5rem;
   }
 
-  /* 📦 Popup */
   .popup {
     width: 90%;
     max-width: 280px;
@@ -483,5 +527,3 @@ html, body {
     text-align: center;
   }
 }
-
-
