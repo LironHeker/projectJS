@@ -94,7 +94,7 @@ addForm.addEventListener('submit', function (e) {
   const name = document.getElementById('nameInput').value.trim(); // שם
   let phone = phoneInput.value.replace(/\D/g, '').slice(0, 10); // טלפון ללא תווים לא מספריים
   const age = document.getElementById('ageInput').value.trim(); // גיל
-  const imgUrl = document.getElementById('imgInput').value.trim() || 'images/default.jpg'; // כתובת תמונה
+  const imgUrl = document.getElementById('imgInput').value.trim() || 'img/Liron.png'; // כתובת תמונה
 
   // בדיקת שם
   if (!/^[A-Za-z֐-׿\s]+$/.test(name)) {
