@@ -193,3 +193,56 @@ contactsContainer.addEventListener('click', (e) => {
 closeDetailBtn.addEventListener('click', () => {
   detailPopup.classList.add('hidden');
 });
+
+// כפתור מועדפים וכפתור מחיקת כל אנשי הקשר 
+const showFavoritesBtn = document.getElementById('showFavoritesBtn');
+const deleteAllBtn = document.getElementById('deleteAllBtn');
+
+// מצב כהה - כפתור
+const darkModeBtn = document.createElement('button');
+darkModeBtn.id = 'toggleDarkMode';
+darkModeBtn.textContent = 'Toggle Dark Mode';
+document.querySelector('.right-controls').appendChild(darkModeBtn);
+
+// הפעלת מצב כהה/בהיר
+darkModeBtn.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle('dark-mode');
+  darkModeBtn.textContent = isDark ? 'Toggle Bright Mode' : 'Toggle Dark Mode';
+  darkModeBtn.style.backgroundColor = isDark ? 'white' : 'black';
+  darkModeBtn.style.color = isDark ? 'black' : 'white';
+});
+
+// עיצוב טלפון תוך כדי הקלדה בשדה הטלפון
+phoneInput.addEventListener('input', (e) => {
+  const raw = e.target.value.replace(/\D/g, '').slice(0, 10); // מסיר את כל התווים שאינם ספרות ומגביל לעד 10 ספרות
+  e.target.value = raw.length >= 4 ? `${raw.slice(0, 3)}-${raw.slice(3)}` : raw; // אם יש לפחות 4 ספרות – מוסיף מקף אחרי 3 הספרות הראשונות, אחרת משאיר כמו שזה
+});
+
+
+
+// חיפוש בזמן אמת
+searchInput.addEventListener('input', () => {
+  renderContacts(searchInput.value.trim().toLowerCase());
+});
+
+// תצוגת מועדפים בלבד
+showFavoritesBtn.addEventListener('click', () => {
+  showOnlyFavorites = !showOnlyFavorites;
+  showFavoritesBtn.innerHTML = showOnlyFavorites
+    ? '<i class="fas fa-list"></i> Show All'
+    : '<i class="fas fa-star"></i> Show Favorites';
+  renderContacts(searchInput.value.trim().toLowerCase());
+});
+
+// מחיקת כל אנשי הקשר
+deleteAllBtn.addEventListener('click', () => {
+  if (contacts.length === 0) {
+    alert("No contacts to delete.");
+    return;
+  }
+  const confirmDelete = confirm("Are you sure you want to delete all contacts?");
+  if (!confirmDelete) return;
+  contacts.length = 0;
+  favorites.length = 0;
+  renderContacts();
+});
